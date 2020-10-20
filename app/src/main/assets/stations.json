@@ -1,0 +1,1337 @@
+ [{
+		"StationDesc": "Belfast",
+		"StationAlias": "",
+		"StationLatitude": "54.6123",
+		"StationLongitude": "-5.91744",
+		"StationCode": "BFSTC",
+		"StationId": "228"
+	},
+		{
+			"StationDesc": "Lisburn",
+			"StationAlias": "",
+			"StationLatitude": "54.514",
+			"StationLongitude": "-6.04327",
+			"StationCode": "LBURN",
+			"StationId": "238"
+		},
+		{
+			"StationDesc": "Lurgan",
+			"StationAlias": "",
+			"StationLatitude": "54.4672",
+			"StationLongitude": "-6.33547",
+			"StationCode": "LURGN",
+			"StationId": "241"
+		},
+		{
+			"StationDesc": "Portadown",
+			"StationAlias": "",
+			"StationLatitude": "54.4295",
+			"StationLongitude": "-6.43868",
+			"StationCode": "PDOWN",
+			"StationId": "242"
+		},
+		{
+			"StationDesc": "Sligo",
+			"StationAlias": "",
+			"StationLatitude": "54.2723",
+			"StationLongitude": "-8.48249",
+			"StationCode": "SLIGO",
+			"StationId": "180"
+		},
+		{
+			"StationDesc": "Newry",
+			"StationAlias": "",
+			"StationLatitude": "54.1911",
+			"StationLongitude": "-6.36225",
+			"StationCode": "NEWRY",
+			"StationId": "260"
+		},
+		{
+			"StationDesc": "Collooney",
+			"StationAlias": "",
+			"StationLatitude": "54.1871",
+			"StationLongitude": "-8.49453",
+			"StationCode": "COLNY",
+			"StationId": "177"
+		},
+		{
+			"StationDesc": "Ballina",
+			"StationAlias": "",
+			"StationLatitude": "54.1085",
+			"StationLongitude": "-9.16146",
+			"StationCode": "BALNA",
+			"StationId": "167"
+		},
+		{
+			"StationDesc": "Ballymote",
+			"StationAlias": "",
+			"StationLatitude": "54.0887",
+			"StationLongitude": "-8.52088",
+			"StationCode": "BMOTE",
+			"StationId": "176"
+		},
+		{
+			"StationDesc": "Dundalk",
+			"StationAlias": "",
+			"StationLatitude": "54.0007",
+			"StationLongitude": "-6.41291",
+			"StationCode": "DDALK",
+			"StationId": "123"
+		},
+		{
+			"StationDesc": "Foxford",
+			"StationAlias": "",
+			"StationLatitude": "53.983",
+			"StationLongitude": "-9.1364",
+			"StationCode": "FXFRD",
+			"StationId": "193"
+		},
+		{
+			"StationDesc": "Boyle",
+			"StationAlias": "",
+			"StationLatitude": "53.9676",
+			"StationLongitude": "-8.30438",
+			"StationCode": "BOYLE",
+			"StationId": "175"
+		},
+		{
+			"StationDesc": "Carrick on Shannon",
+			"StationAlias": "",
+			"StationLatitude": "53.9383",
+			"StationLongitude": "-8.10657",
+			"StationCode": "CKOSH",
+			"StationId": "174"
+		},
+		{
+			"StationDesc": "Dromod",
+			"StationAlias": "",
+			"StationLatitude": "53.8591",
+			"StationLongitude": "-7.9164",
+			"StationCode": "DRMOD",
+			"StationId": "173"
+		},
+		{
+			"StationDesc": "Castlebar",
+			"StationAlias": "",
+			"StationLatitude": "53.8471",
+			"StationLongitude": "-9.2873",
+			"StationCode": "CLBAR",
+			"StationId": "168"
+		},
+		{
+			"StationDesc": "Manulla Junction",
+			"StationAlias": "",
+			"StationLatitude": "53.828",
+			"StationLongitude": "-9.19296",
+			"StationCode": "MNLAJ",
+			"StationId": "194"
+		},
+		{
+			"StationDesc": "Westport",
+			"StationAlias": "",
+			"StationLatitude": "53.7955",
+			"StationLongitude": "-9.50885",
+			"StationCode": "WPORT",
+			"StationId": "169"
+		},
+		{
+			"StationDesc": "Ballyhaunis",
+			"StationAlias": "",
+			"StationLatitude": "53.7616",
+			"StationLongitude": "-8.7584",
+			"StationCode": "BYHNS",
+			"StationId": "165"
+		},
+		{
+			"StationDesc": "Castlerea",
+			"StationAlias": "",
+			"StationLatitude": "53.7612",
+			"StationLongitude": "-8.48448",
+			"StationCode": "CSREA",
+			"StationId": "164"
+		},
+		{
+			"StationDesc": "Longford",
+			"StationAlias": "",
+			"StationLatitude": "53.7243",
+			"StationLongitude": "-7.79574",
+			"StationCode": "LFORD",
+			"StationId": "172"
+		},
+		{
+			"StationDesc": "Claremorris",
+			"StationAlias": "",
+			"StationLatitude": "53.7204",
+			"StationLongitude": "-9.00222",
+			"StationCode": "CLMRS",
+			"StationId": "166"
+		},
+		{
+			"StationDesc": "Drogheda",
+			"StationAlias": "",
+			"StationLatitude": "53.712",
+			"StationLongitude": "-6.33538",
+			"StationCode": "DGHDA",
+			"StationId": "120"
+		},
+		{
+			"StationDesc": "Edgeworthstown",
+			"StationAlias": "",
+			"StationLatitude": "53.6888",
+			"StationLongitude": "-7.60299",
+			"StationCode": "ETOWN",
+			"StationId": "171"
+		},
+		{
+			"StationDesc": "Laytown",
+			"StationAlias": "",
+			"StationLatitude": "53.6794",
+			"StationLongitude": "-6.24253",
+			"StationCode": "LTOWN",
+			"StationId": "119"
+		},
+		{
+			"StationDesc": "Gormanston",
+			"StationAlias": "",
+			"StationLatitude": "53.638",
+			"StationLongitude": "-6.21705",
+			"StationCode": "GSTON",
+			"StationId": "117"
+		},
+		{
+			"StationDesc": "Roscommon",
+			"StationAlias": "",
+			"StationLatitude": "53.6243",
+			"StationLongitude": "-8.19631",
+			"StationCode": "RSCMN",
+			"StationId": "163"
+		},
+		{
+			"StationDesc": "Balbriggan",
+			"StationAlias": "",
+			"StationLatitude": "53.6118",
+			"StationLongitude": "-6.18226",
+			"StationCode": "BBRGN",
+			"StationId": "116"
+		},
+		{
+			"StationDesc": "Skerries",
+			"StationAlias": "",
+			"StationLatitude": "53.5741",
+			"StationLongitude": "-6.11933",
+			"StationCode": "SKRES",
+			"StationId": "115"
+		},
+		{
+			"StationDesc": "Mullingar",
+			"StationAlias": "",
+			"StationLatitude": "53.523",
+			"StationLongitude": "-7.34608",
+			"StationCode": "MLGAR",
+			"StationId": "153"
+		},
+		{
+			"StationDesc": "Rush and Lusk",
+			"StationAlias": "",
+			"StationLatitude": "53.5201",
+			"StationLongitude": "-6.1439",
+			"StationCode": "RLUSK",
+			"StationId": "114"
+		},
+		{
+			"StationDesc": "Donabate",
+			"StationAlias": "",
+			"StationLatitude": "53.4855",
+			"StationLongitude": "-6.15134",
+			"StationCode": "DBATE",
+			"StationId": "113"
+		},
+		{
+			"StationDesc": "Malahide",
+			"StationAlias": "",
+			"StationLatitude": "53.4509",
+			"StationLongitude": "-6.15649",
+			"StationCode": "MHIDE",
+			"StationId": "112"
+		},
+		{
+			"StationDesc": "M3 Parkway",
+			"StationAlias": "",
+			"StationLatitude": "53.4349",
+			"StationLongitude": "-6.46898",
+			"StationCode": "M3WAY",
+			"StationId": "86"
+		},
+		{
+			"StationDesc": "Athlone",
+			"StationAlias": "",
+			"StationLatitude": "53.4273",
+			"StationLongitude": "-7.93683",
+			"StationCode": "ATLNE",
+			"StationId": "156"
+		},
+		{
+			"StationDesc": "Dunboyne",
+			"StationAlias": "",
+			"StationLatitude": "53.4175",
+			"StationLongitude": "-6.46483",
+			"StationCode": "DBYNE",
+			"StationId": "85"
+		},
+		{
+			"StationDesc": "Portmarnock",
+			"StationAlias": "",
+			"StationLatitude": "53.4169",
+			"StationLongitude": "-6.1512",
+			"StationCode": "PMNCK",
+			"StationId": "111"
+		},
+		{
+			"StationDesc": "Enfield",
+			"StationAlias": "",
+			"StationLatitude": "53.4157",
+			"StationLongitude": "-6.83395",
+			"StationCode": "ENFLD",
+			"StationId": "83"
+		},
+		{
+			"StationDesc": "Kilcock",
+			"StationAlias": "",
+			"StationLatitude": "53.4043",
+			"StationLongitude": "-6.67892",
+			"StationCode": "KCOCK",
+			"StationId": "90"
+		},
+		{
+			"StationDesc": "Clongriffin",
+			"StationAlias": "",
+			"StationLatitude": "53.4032",
+			"StationLongitude": "-6.14839",
+			"StationCode": "GRGRD",
+			"StationId": "187"
+		},
+		{
+			"StationDesc": "Sutton",
+			"StationAlias": "",
+			"StationLatitude": "53.392",
+			"StationLongitude": "-6.11448",
+			"StationCode": "SUTTN",
+			"StationId": "107"
+		},
+		{
+			"StationDesc": "Bayside",
+			"StationAlias": "",
+			"StationLatitude": "53.3917",
+			"StationLongitude": "-6.13678",
+			"StationCode": "BYSDE",
+			"StationId": "106"
+		},
+		{
+			"StationDesc": "Howth Junction",
+			"StationAlias": "Donaghmede ( Howth Junction )",
+			"StationLatitude": "53.3909",
+			"StationLongitude": "-6.15672",
+			"StationCode": "HWTHJ",
+			"StationId": "105"
+		},
+		{
+			"StationDesc": "Howth",
+			"StationAlias": "",
+			"StationLatitude": "53.3891",
+			"StationLongitude": "-6.07401",
+			"StationCode": "HOWTH",
+			"StationId": "108"
+		},
+		{
+			"StationDesc": "Kilbarrack",
+			"StationAlias": "",
+			"StationLatitude": "53.387",
+			"StationLongitude": "-6.16163",
+			"StationCode": "KBRCK",
+			"StationId": "104"
+		},
+		{
+			"StationDesc": "Hansfield",
+			"StationAlias": "",
+			"StationLatitude": "53.3853",
+			"StationLongitude": "-6.44205",
+			"StationCode": "HAFLD",
+			"StationId": "87"
+		},
+		{
+			"StationDesc": "Clonsilla",
+			"StationAlias": "",
+			"StationLatitude": "53.3831",
+			"StationLongitude": "-6.4242",
+			"StationCode": "CLSLA",
+			"StationId": "94"
+		},
+		{
+			"StationDesc": "Castleknock",
+			"StationAlias": "",
+			"StationLatitude": "53.3816",
+			"StationLongitude": "-6.37149",
+			"StationCode": "CNOCK",
+			"StationId": "96"
+		},
+		{
+			"StationDesc": "Raheny",
+			"StationAlias": "",
+			"StationLatitude": "53.3815",
+			"StationLongitude": "-6.17699",
+			"StationCode": "RAHNY",
+			"StationId": "103"
+		},
+		{
+			"StationDesc": "Harmonstown",
+			"StationAlias": "",
+			"StationLatitude": "53.3786",
+			"StationLongitude": "-6.19131",
+			"StationCode": "HTOWN",
+			"StationId": "102"
+		},
+		{
+			"StationDesc": "Maynooth",
+			"StationAlias": "",
+			"StationLatitude": "53.378",
+			"StationLongitude": "-6.58993",
+			"StationCode": "MYNTH",
+			"StationId": "91"
+		},
+		{
+			"StationDesc": "Navan Road Parkway",
+			"StationAlias": "Phoenix Park",
+			"StationLatitude": "53.3777",
+			"StationLongitude": "-6.34591",
+			"StationCode": "PHNPK",
+			"StationId": "89"
+		},
+		{
+			"StationDesc": "Coolmine",
+			"StationAlias": "",
+			"StationLatitude": "53.3776",
+			"StationLongitude": "-6.39072",
+			"StationCode": "CMINE",
+			"StationId": "95"
+		},
+		{
+			"StationDesc": "Ashtown",
+			"StationAlias": "",
+			"StationLatitude": "53.3755",
+			"StationLongitude": "-6.33135",
+			"StationCode": "ASHTN",
+			"StationId": "97"
+		},
+		{
+			"StationDesc": "Leixlip (Confey)",
+			"StationAlias": "",
+			"StationLatitude": "53.3743",
+			"StationLongitude": "-6.48624",
+			"StationCode": "LXCON",
+			"StationId": "93"
+		},
+		{
+			"StationDesc": "Killester",
+			"StationAlias": "",
+			"StationLatitude": "53.373",
+			"StationLongitude": "-6.20442",
+			"StationCode": "KLSTR",
+			"StationId": "101"
+		},
+		{
+			"StationDesc": "Broombridge",
+			"StationAlias": "",
+			"StationLatitude": "53.3725",
+			"StationLongitude": "-6.29869",
+			"StationCode": "BBRDG",
+			"StationId": "98"
+		},
+		{
+			"StationDesc": "Leixlip (Louisa Bridge)",
+			"StationAlias": "",
+			"StationLatitude": "53.3704",
+			"StationLongitude": "-6.50598",
+			"StationCode": "LXLSA",
+			"StationId": "92"
+		},
+		{
+			"StationDesc": "Drumcondra",
+			"StationAlias": "",
+			"StationLatitude": "53.3632",
+			"StationLongitude": "-6.25908",
+			"StationCode": "DCDRA",
+			"StationId": "99"
+		},
+		{
+			"StationDesc": "Clontarf Road",
+			"StationAlias": "",
+			"StationLatitude": "53.3629",
+			"StationLongitude": "-6.22753",
+			"StationCode": "CTARF",
+			"StationId": "109"
+		},
+		{
+			"StationDesc": "Dublin Connolly",
+			"StationAlias": "Connolly",
+			"StationLatitude": "53.3531",
+			"StationLongitude": "-6.24591",
+			"StationCode": "CNLLY",
+			"StationId": "100"
+		},
+		{
+			"StationDesc": "Docklands",
+			"StationAlias": "",
+			"StationLatitude": "53.3509",
+			"StationLongitude": "-6.23929",
+			"StationCode": "DCKLS",
+			"StationId": "84"
+		},
+		{
+			"StationDesc": "Tara Street",
+			"StationAlias": "",
+			"StationLatitude": "53.347",
+			"StationLongitude": "-6.25425",
+			"StationCode": "TARA",
+			"StationId": "124"
+		},
+		{
+			"StationDesc": "Dublin Heuston",
+			"StationAlias": "Heuston",
+			"StationLatitude": "53.3464",
+			"StationLongitude": "-6.29461",
+			"StationCode": "HSTON",
+			"StationId": "1"
+		},
+		{
+			"StationDesc": "Dublin Pearse",
+			"StationAlias": "Pearse",
+			"StationLatitude": "53.3433",
+			"StationLongitude": "-6.24829",
+			"StationCode": "PERSE",
+			"StationId": "150"
+		},
+		{
+			"StationDesc": "Woodlawn",
+			"StationAlias": "",
+			"StationLatitude": "53.3432",
+			"StationLongitude": "-8.47231",
+			"StationCode": "WLAWN",
+			"StationId": "158"
+		},
+		{
+			"StationDesc": "Grand Canal Dock",
+			"StationAlias": "",
+			"StationLatitude": "53.3397",
+			"StationLongitude": "-6.23773",
+			"StationCode": "GCDK",
+			"StationId": "110"
+		},
+		{
+			"StationDesc": "Clara",
+			"StationAlias": "",
+			"StationLatitude": "53.3395",
+			"StationLongitude": "-7.61596",
+			"StationCode": "CLARA",
+			"StationId": "73"
+		},
+		{
+			"StationDesc": "Ballinasloe",
+			"StationAlias": "",
+			"StationLatitude": "53.3363",
+			"StationLongitude": "-8.24081",
+			"StationCode": "BSLOE",
+			"StationId": "157"
+		},
+		{
+			"StationDesc": "Adamstown",
+			"StationAlias": "",
+			"StationLatitude": "53.3353",
+			"StationLongitude": "-7",
+			"StationCode": "ADAMS",
+			"StationId": "1075"
+		},
+		{
+			"StationDesc": "Adamstown",
+			"StationAlias": "",
+			"StationLatitude": "53.3353",
+			"StationLongitude": "-6.45233",
+			"StationCode": "ADAMF",
+			"StationId": "975"
+		},
+		{
+			"StationDesc": "Adamstown",
+			"StationAlias": "",
+			"StationLatitude": "53.3353",
+			"StationLongitude": "-6.45233",
+			"StationCode": "ADMTN",
+			"StationId": "75"
+		},
+		{
+			"StationDesc": "Lansdowne Road",
+			"StationAlias": "",
+			"StationLatitude": "53.3347",
+			"StationLongitude": "-6.22979",
+			"StationCode": "LDWNE",
+			"StationId": "125"
+		},
+		{
+			"StationDesc": "Park West and Cherry Orchard",
+			"StationAlias": "Park West (Cherry Orchard )",
+			"StationLatitude": "53.334",
+			"StationLongitude": "-6.37868",
+			"StationCode": "CHORC",
+			"StationId": "76"
+		},
+		{
+			"StationDesc": "Park West and Cherry Orchard",
+			"StationAlias": "Park West (Cherry Orchard )",
+			"StationLatitude": "53.334",
+			"StationLongitude": "-6.37868",
+			"StationCode": "PWESF",
+			"StationId": "976"
+		},
+		{
+			"StationDesc": "PARK WEST",
+			"StationAlias": "Park West (Cherry Orchard )",
+			"StationLatitude": "53.334",
+			"StationLongitude": "-6.37868",
+			"StationCode": "PWESS",
+			"StationId": "1076"
+		},
+		{
+			"StationDesc": "Clondalkin",
+			"StationAlias": "Fonthill ( Clondalkin )",
+			"StationLatitude": "53.3334",
+			"StationLongitude": "-6.40628",
+			"StationCode": "CLONS",
+			"StationId": "1077"
+		},
+		{
+			"StationDesc": "Clondalkin",
+			"StationAlias": "Fonthill ( Clondalkin )",
+			"StationLatitude": "53.3334",
+			"StationLongitude": "-6.40628",
+			"StationCode": "CLONF",
+			"StationId": "977"
+		},
+		{
+			"StationDesc": "Clondalkin",
+			"StationAlias": "Fonthill ( Clondalkin )",
+			"StationLatitude": "53.3334",
+			"StationLongitude": "-6.40628",
+			"StationCode": "CLDKN",
+			"StationId": "77"
+		},
+		{
+			"StationDesc": "Sandymount",
+			"StationAlias": "",
+			"StationLatitude": "53.3281",
+			"StationLongitude": "-6.22116",
+			"StationCode": "SMONT",
+			"StationId": "188"
+		},
+		{
+			"StationDesc": "Hazelhatch",
+			"StationAlias": "Celbridge (Hazelhatch )",
+			"StationLatitude": "53.3223",
+			"StationLongitude": "-6.52356",
+			"StationCode": "HZLCH",
+			"StationId": "78"
+		},
+		{
+			"StationDesc": "Hazelhatch",
+			"StationAlias": "Celbridge (Hazelhatch )",
+			"StationLatitude": "53.3223",
+			"StationLongitude": "-6.52356",
+			"StationCode": "HAZEF",
+			"StationId": "978"
+		},
+		{
+			"StationDesc": "Hazelhatch",
+			"StationAlias": "Celbridge (Hazelhatch )",
+			"StationLatitude": "53.3223",
+			"StationLongitude": "-6.52356",
+			"StationCode": "HAZES",
+			"StationId": "1078"
+		},
+		{
+			"StationDesc": "Attymon",
+			"StationAlias": "",
+			"StationLatitude": "53.3212",
+			"StationLongitude": "-8.60608",
+			"StationCode": "ATMON",
+			"StationId": "159"
+		},
+		{
+			"StationDesc": "Sydney Parade",
+			"StationAlias": "",
+			"StationLatitude": "53.3206",
+			"StationLongitude": "-6.21112",
+			"StationCode": "SIDNY",
+			"StationId": "126"
+		},
+		{
+			"StationDesc": "Booterstown",
+			"StationAlias": "",
+			"StationLatitude": "53.3099",
+			"StationLongitude": "-6.19498",
+			"StationCode": "BTSTN",
+			"StationId": "127"
+		},
+		{
+			"StationDesc": "Blackrock",
+			"StationAlias": "",
+			"StationLatitude": "53.3027",
+			"StationLongitude": "-6.17833",
+			"StationCode": "BROCK",
+			"StationId": "128"
+		},
+		{
+			"StationDesc": "Athenry",
+			"StationAlias": "",
+			"StationLatitude": "53.3015",
+			"StationLongitude": "-8.74855",
+			"StationCode": "ATHRY",
+			"StationId": "162"
+		},
+		{
+			"StationDesc": "Seapoint",
+			"StationAlias": "",
+			"StationLatitude": "53.2991",
+			"StationLongitude": "-6.16512",
+			"StationCode": "SEAPT",
+			"StationId": "129"
+		},
+		{
+			"StationDesc": "Salthill and Monkstown",
+			"StationAlias": "Monkstown ( Salthill )",
+			"StationLatitude": "53.2954",
+			"StationLongitude": "-6.15206",
+			"StationCode": "SHILL",
+			"StationId": "130"
+		},
+		{
+			"StationDesc": "Dun Laoghaire",
+			"StationAlias": "",
+			"StationLatitude": "53.2951",
+			"StationLongitude": "-6.13498",
+			"StationCode": "DLERY",
+			"StationId": "131"
+		},
+		{
+			"StationDesc": "Sandycove",
+			"StationAlias": "Glasthule (Sandycove )",
+			"StationLatitude": "53.2878",
+			"StationLongitude": "-6.12712",
+			"StationCode": "SCOVE",
+			"StationId": "132"
+		},
+		{
+			"StationDesc": "Glenageary",
+			"StationAlias": "",
+			"StationLatitude": "53.2812",
+			"StationLongitude": "-6.12289",
+			"StationCode": "GLGRY",
+			"StationId": "133"
+		},
+		{
+			"StationDesc": "Dalkey",
+			"StationAlias": "",
+			"StationLatitude": "53.2756",
+			"StationLongitude": "-6.10333",
+			"StationCode": "DLKEY",
+			"StationId": "134"
+		},
+		{
+			"StationDesc": "Oranmore",
+			"StationAlias": "",
+			"StationLatitude": "53.2751",
+			"StationLongitude": "-8.94792",
+			"StationCode": "ORNMR",
+			"StationId": "161"
+		},
+		{
+			"StationDesc": "Galway",
+			"StationAlias": "",
+			"StationLatitude": "53.2736",
+			"StationLongitude": "-9.04696",
+			"StationCode": "GALWY",
+			"StationId": "170"
+		},
+		{
+			"StationDesc": "Tullamore",
+			"StationAlias": "",
+			"StationLatitude": "53.2704",
+			"StationLongitude": "-7.49985",
+			"StationCode": "TMORE",
+			"StationId": "72"
+		},
+		{
+			"StationDesc": "Killiney",
+			"StationAlias": "",
+			"StationLatitude": "53.2557",
+			"StationLongitude": "-6.11317",
+			"StationCode": "KILNY",
+			"StationId": "135"
+		},
+		{
+			"StationDesc": "Sallins",
+			"StationAlias": "",
+			"StationLatitude": "53.2469",
+			"StationLongitude": "-6.66386",
+			"StationCode": "SALNS",
+			"StationId": "79"
+		},
+		{
+			"StationDesc": "Shankill",
+			"StationAlias": "",
+			"StationLatitude": "53.2364",
+			"StationLongitude": "-6.11691",
+			"StationCode": "SKILL",
+			"StationId": "136"
+		},
+		{
+			"StationDesc": "Craughwell",
+			"StationAlias": "",
+			"StationLatitude": "53.2252",
+			"StationLongitude": "-8.7359",
+			"StationCode": "CRGHW",
+			"StationId": "184"
+		},
+		{
+			"StationDesc": "Woodbrook",
+			"StationAlias": "",
+			"StationLatitude": "53.22",
+			"StationLongitude": "-6.1101",
+			"StationCode": "WBROK",
+			"StationId": "801"
+		},
+		{
+			"StationDesc": "Bray",
+			"StationAlias": "",
+			"StationLatitude": "53.2043",
+			"StationLongitude": "-6.10046",
+			"StationCode": "BRAY",
+			"StationId": "140"
+		},
+		{
+			"StationDesc": "Newbridge",
+			"StationAlias": "",
+			"StationLatitude": "53.1855",
+			"StationLongitude": "-6.80807",
+			"StationCode": "NBRGE",
+			"StationId": "4"
+		},
+		{
+			"StationDesc": "Curragh",
+			"StationAlias": "",
+			"StationLatitude": "53.1725",
+			"StationLongitude": "-6.86245",
+			"StationCode": "CURAH",
+			"StationId": "5"
+		},
+		{
+			"StationDesc": "Kildare",
+			"StationAlias": "",
+			"StationLatitude": "53.163",
+			"StationLongitude": "-6.90802",
+			"StationCode": "KDARE",
+			"StationId": "6"
+		},
+		{
+			"StationDesc": "Ardrahan",
+			"StationAlias": "",
+			"StationLatitude": "53.1572",
+			"StationLongitude": "-8.81483",
+			"StationCode": "ARHAN",
+			"StationId": "183"
+		},
+		{
+			"StationDesc": "Portarlington",
+			"StationAlias": "",
+			"StationLatitude": "53.146",
+			"StationLongitude": "-7.18055",
+			"StationCode": "PTRTN",
+			"StationId": "8"
+		},
+		{
+			"StationDesc": "Monasterevin",
+			"StationAlias": "",
+			"StationLatitude": "53.1454",
+			"StationLongitude": "-7.06361",
+			"StationCode": "MONVN",
+			"StationId": "7"
+		},
+		{
+			"StationDesc": "Greystones",
+			"StationAlias": "",
+			"StationLatitude": "53.1442",
+			"StationLongitude": "-6.06085",
+			"StationCode": "GSTNS",
+			"StationId": "141"
+		},
+		{
+			"StationDesc": "Kilcoole",
+			"StationAlias": "",
+			"StationLatitude": "53.107",
+			"StationLongitude": "-6.04112",
+			"StationCode": "KCOOL",
+			"StationId": "139"
+		},
+		{
+			"StationDesc": "Gort",
+			"StationAlias": "",
+			"StationLatitude": "53.0653",
+			"StationLongitude": "-8.81595",
+			"StationCode": "GORT",
+			"StationId": "182"
+		},
+		{
+			"StationDesc": "Portlaoise",
+			"StationAlias": "",
+			"StationLatitude": "53.0371",
+			"StationLongitude": "-7.30086",
+			"StationCode": "PTLSE",
+			"StationId": "9"
+		},
+		{
+			"StationDesc": "Athy",
+			"StationAlias": "",
+			"StationLatitude": "52.992",
+			"StationLongitude": "-6.9762",
+			"StationCode": "ATHY",
+			"StationId": "45"
+		},
+		{
+			"StationDesc": "Wicklow",
+			"StationAlias": "",
+			"StationLatitude": "52.9882",
+			"StationLongitude": "-6.05338",
+			"StationCode": "WLOW",
+			"StationId": "142"
+		},
+		{
+			"StationDesc": "Roscrea",
+			"StationAlias": "",
+			"StationLatitude": "52.9607",
+			"StationLongitude": "-7.7941",
+			"StationCode": "RCREA",
+			"StationId": "31"
+		},
+		{
+			"StationDesc": "Cloughjordan",
+			"StationAlias": "",
+			"StationLatitude": "52.9363",
+			"StationLongitude": "-8.0246",
+			"StationCode": "CJRDN",
+			"StationId": "32"
+		},
+		{
+			"StationDesc": "Rathdrum",
+			"StationAlias": "",
+			"StationLatitude": "52.9295",
+			"StationLongitude": "-6.22641",
+			"StationCode": "RDRUM",
+			"StationId": "143"
+		},
+		{
+			"StationDesc": "Ballybrophy",
+			"StationAlias": "",
+			"StationLatitude": "52.8999",
+			"StationLongitude": "-7.60259",
+			"StationCode": "BBRHY",
+			"StationId": "11"
+		},
+		{
+			"StationDesc": "Nenagh",
+			"StationAlias": "",
+			"StationLatitude": "52.8605",
+			"StationLongitude": "-8.19471",
+			"StationCode": "NNAGH",
+			"StationId": "33"
+		},
+		{
+			"StationDesc": "Carlow",
+			"StationAlias": "",
+			"StationLatitude": "52.8407",
+			"StationLongitude": "-6.92217",
+			"StationCode": "CRLOW",
+			"StationId": "46"
+		},
+		{
+			"StationDesc": "Ennis",
+			"StationAlias": "",
+			"StationLatitude": "52.8386",
+			"StationLongitude": "-8.97491",
+			"StationCode": "ENNIS",
+			"StationId": "181"
+		},
+		{
+			"StationDesc": "Arklow",
+			"StationAlias": "",
+			"StationLatitude": "52.7932",
+			"StationLongitude": "-6.15994",
+			"StationCode": "ARKLW",
+			"StationId": "144"
+		},
+		{
+			"StationDesc": "Templemore",
+			"StationAlias": "",
+			"StationLatitude": "52.7878",
+			"StationLongitude": "-7.82293",
+			"StationCode": "TPMOR",
+			"StationId": "12"
+		},
+		{
+			"StationDesc": "Birdhill",
+			"StationAlias": "",
+			"StationLatitude": "52.7656",
+			"StationLongitude": "-8.44247",
+			"StationCode": "BHILL",
+			"StationId": "34"
+		},
+		{
+			"StationDesc": "Sixmilebridge",
+			"StationAlias": "",
+			"StationLatitude": "52.7376",
+			"StationLongitude": "-8.78427",
+			"StationCode": "SXMBR",
+			"StationId": "185"
+		},
+		{
+			"StationDesc": "Castleconnell",
+			"StationAlias": "",
+			"StationLatitude": "52.7128",
+			"StationLongitude": "-8.49794",
+			"StationCode": "CCONL",
+			"StationId": "35"
+		},
+		{
+			"StationDesc": "Muine Bheag",
+			"StationAlias": "Bagenalstown",
+			"StationLatitude": "52.699",
+			"StationLongitude": "-6.95213",
+			"StationCode": "MNEBG",
+			"StationId": "47"
+		},
+		{
+			"StationDesc": "Thurles",
+			"StationAlias": "",
+			"StationLatitude": "52.6766",
+			"StationLongitude": "-7.82189",
+			"StationCode": "THRLS",
+			"StationId": "13"
+		},
+		{
+			"StationDesc": "Gorey",
+			"StationAlias": "",
+			"StationLatitude": "52.6712",
+			"StationLongitude": "-6.29195",
+			"StationCode": "GOREY",
+			"StationId": "145"
+		},
+		{
+			"StationDesc": "Limerick",
+			"StationAlias": "",
+			"StationLatitude": "52.6587",
+			"StationLongitude": "-8.62397",
+			"StationCode": "LMRCK",
+			"StationId": "40"
+		},
+		{
+			"StationDesc": "Kilkenny",
+			"StationAlias": "",
+			"StationLatitude": "52.655",
+			"StationLongitude": "-7.24498",
+			"StationCode": "KKNNY",
+			"StationId": "48"
+		},
+		{
+			"StationDesc": "Thomastown",
+			"StationAlias": "",
+			"StationLatitude": "52.523",
+			"StationLongitude": "-7.14891",
+			"StationCode": "THTWN",
+			"StationId": "49"
+		},
+		{
+			"StationDesc": "Enniscorthy",
+			"StationAlias": "",
+			"StationLatitude": "52.5046",
+			"StationLongitude": "-6.56627",
+			"StationCode": "ECRTY",
+			"StationId": "147"
+		},
+		{
+			"StationDesc": "Limerick Junction",
+			"StationAlias": "",
+			"StationLatitude": "52.5009",
+			"StationLongitude": "-8.20003",
+			"StationCode": "LMRKJ",
+			"StationId": "16"
+		},
+		{
+			"StationDesc": "Tipperary",
+			"StationAlias": "",
+			"StationLatitude": "52.4701",
+			"StationLongitude": "-8.1625",
+			"StationCode": "TIPRY",
+			"StationId": "41"
+		},
+		{
+			"StationDesc": "Cahir",
+			"StationAlias": "",
+			"StationLatitude": "52.3777",
+			"StationLongitude": "-7.92181",
+			"StationCode": "CAHIR",
+			"StationId": "42"
+		},
+		{
+			"StationDesc": "Clonmel",
+			"StationAlias": "",
+			"StationLatitude": "52.3611",
+			"StationLongitude": "-7.69936",
+			"StationCode": "CLMEL",
+			"StationId": "43"
+		},
+		{
+			"StationDesc": "Carrick on Suir",
+			"StationAlias": "",
+			"StationLatitude": "52.3487",
+			"StationLongitude": "-7.40354",
+			"StationCode": "CKOSR",
+			"StationId": "44"
+		},
+		{
+			"StationDesc": "Charleville",
+			"StationAlias": "",
+			"StationLatitude": "52.3468",
+			"StationLongitude": "-8.65362",
+			"StationCode": "CVILL",
+			"StationId": "19"
+		},
+		{
+			"StationDesc": "Wexford",
+			"StationAlias": "",
+			"StationLatitude": "52.3434",
+			"StationLongitude": "-6.4636",
+			"StationCode": "WXFRD",
+			"StationId": "148"
+		},
+		{
+			"StationDesc": "Campile",
+			"StationAlias": "",
+			"StationLatitude": "52.2855",
+			"StationLongitude": "-6.93896",
+			"StationCode": "CPILE",
+			"StationId": "52"
+		},
+		{
+			"StationDesc": "Ballycullane",
+			"StationAlias": "",
+			"StationLatitude": "52.2834",
+			"StationLongitude": "-6.83958",
+			"StationCode": "BCLAN",
+			"StationId": "53"
+		},
+		{
+			"StationDesc": "Rosslare Strand",
+			"StationAlias": "",
+			"StationLatitude": "52.2726",
+			"StationLongitude": "-6.39254",
+			"StationCode": "RLSTD",
+			"StationId": "58"
+		},
+		{
+			"StationDesc": "Tralee",
+			"StationAlias": "",
+			"StationLatitude": "52.271",
+			"StationLongitude": "-9.69846",
+			"StationCode": "TRLEE",
+			"StationId": "28"
+		},
+		{
+			"StationDesc": "Wellingtonbridge",
+			"StationAlias": "",
+			"StationLatitude": "52.2678",
+			"StationLongitude": "-6.75392",
+			"StationCode": "WBDGE",
+			"StationId": "54"
+		},
+		{
+			"StationDesc": "Waterford",
+			"StationAlias": "",
+			"StationLatitude": "52.2667",
+			"StationLongitude": "-7.1183",
+			"StationCode": "WFORD",
+			"StationId": "50"
+		},
+		{
+			"StationDesc": "Rosslare Europort",
+			"StationAlias": "Rosslare Harbour",
+			"StationLatitude": "52.2531",
+			"StationLongitude": "-6.33493",
+			"StationCode": "RLEPT",
+			"StationId": "60"
+		},
+		{
+			"StationDesc": "Bridgetown",
+			"StationAlias": "",
+			"StationLatitude": "52.2312",
+			"StationLongitude": "-6.54918",
+			"StationCode": "BRGTN",
+			"StationId": "56"
+		},
+		{
+			"StationDesc": "Farranfore",
+			"StationAlias": "",
+			"StationLatitude": "52.1733",
+			"StationLongitude": "-9.55278",
+			"StationCode": "FFORE",
+			"StationId": "27"
+		},
+		{
+			"StationDesc": "Mallow",
+			"StationAlias": "",
+			"StationLatitude": "52.1396",
+			"StationLongitude": "-8.65521",
+			"StationCode": "MLLOW",
+			"StationId": "21"
+		},
+		{
+			"StationDesc": "Banteer",
+			"StationAlias": "",
+			"StationLatitude": "52.1287",
+			"StationLongitude": "-8.89793",
+			"StationCode": "BTEER",
+			"StationId": "23"
+		},
+		{
+			"StationDesc": "Rathmore",
+			"StationAlias": "",
+			"StationLatitude": "52.0854",
+			"StationLongitude": "-9.21756",
+			"StationCode": "RMORE",
+			"StationId": "25"
+		},
+		{
+			"StationDesc": "Millstreet",
+			"StationAlias": "",
+			"StationLatitude": "52.0776",
+			"StationLongitude": "-9.06973",
+			"StationCode": "MLSRT",
+			"StationId": "24"
+		},
+		{
+			"StationDesc": "Killarney",
+			"StationAlias": "",
+			"StationLatitude": "52.0595",
+			"StationLongitude": "-9.50198",
+			"StationCode": "KLRNY",
+			"StationId": "26"
+		},
+		{
+			"StationDesc": "Midleton",
+			"StationAlias": "",
+			"StationLatitude": "51.9212",
+			"StationLongitude": "-8.17579",
+			"StationCode": "MDLTN",
+			"StationId": "68"
+		},
+		{
+			"StationDesc": "Carrigtwohill",
+			"StationAlias": "",
+			"StationLatitude": "51.9163",
+			"StationLongitude": "-8.26323",
+			"StationCode": "CGTWL",
+			"StationId": "67"
+		},
+		{
+			"StationDesc": "Glounthaune",
+			"StationAlias": "",
+			"StationLatitude": "51.9112",
+			"StationLongitude": "-8.3254",
+			"StationCode": "GHANE",
+			"StationId": "380"
+		},
+		{
+			"StationDesc": "LittleIsland",
+			"StationAlias": "Little Island",
+			"StationLatitude": "51.9078",
+			"StationLongitude": "-8.35466",
+			"StationCode": "LSLND",
+			"StationId": "61"
+		},
+		{
+			"StationDesc": "Cork",
+			"StationAlias": "",
+			"StationLatitude": "51.9018",
+			"StationLongitude": "-8.4582",
+			"StationCode": "CORK",
+			"StationId": "30"
+		},
+		{
+			"StationDesc": "Fota",
+			"StationAlias": "",
+			"StationLatitude": "51.896",
+			"StationLongitude": "-8.3183",
+			"StationCode": "FOTA",
+			"StationId": "63"
+		},
+		{
+			"StationDesc": "Carrigaloe",
+			"StationAlias": "",
+			"StationLatitude": "51.8688",
+			"StationLongitude": "-8.32417",
+			"StationCode": "CGLOE",
+			"StationId": "64"
+		},
+		{
+			"StationDesc": "Rushbrooke",
+			"StationAlias": "",
+			"StationLatitude": "51.8496",
+			"StationLongitude": "-8.32252",
+			"StationCode": "RBROK",
+			"StationId": "65"
+		},
+		{
+			"StationDesc": "Cobh",
+			"StationAlias": "",
+			"StationLatitude": "51.8491",
+			"StationLongitude": "-8.29956",
+			"StationCode": "COBH",
+			"StationId": "66"
+		},
+		{
+			"StationDesc": "CITY JUNCTION",
+			"StationAlias": "Dublin Belfast",
+			"StationLatitude": "0",
+			"StationLongitude": "0",
+			"StationCode": "CITYJ",
+			"StationId": "1516"
+		},
+		{
+			"StationDesc": "CENTRAL JUNCTION",
+			"StationAlias": "Dublin Belfast",
+			"StationLatitude": "0",
+			"StationLongitude": "0",
+			"StationCode": "CENTJ",
+			"StationId": "1517"
+		},
+		{
+			"StationDesc": "DUNMURRAY",
+			"StationAlias": "Dublin Belfast",
+			"StationLatitude": "0",
+			"StationLongitude": "0",
+			"StationCode": "DUNMR",
+			"StationId": "1518"
+		},
+		{
+			"StationDesc": "MOIRA",
+			"StationAlias": "Dublin Belfast",
+			"StationLatitude": "0",
+			"StationLongitude": "0",
+			"StationCode": "MOIRA",
+			"StationId": "1519"
+		}
+	]
