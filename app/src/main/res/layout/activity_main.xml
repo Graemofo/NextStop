@@ -4,31 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
+
     <TextView
-        android:textAlignment="center"
-        android:gravity="center"
         android:id="@+id/textView"
         android:layout_width="306dp"
-        android:layout_height="82dp"
+        android:layout_height="52dp"
+        android:gravity="center"
         android:text="Please enter your destination "
-        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textColor="@color/text"
+        android:textColorHint="@color/text"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintVertical_bias="0.024" />
 
-    <EditText
-        android:layout_width="304dp"
-        android:layout_height="52dp"
-        android:hint="Destination"
+    <AutoCompleteTextView
+        android:id="@+id/autoComplete"
+        android:layout_width="257dp"
+        android:layout_height="39dp"
+        android:completionHint="Select a train station"
+        android:hint="Enter Destination"
+        android:textColor="@color/text"
+        android:textColorHint="@color/text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.146"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintVertical_bias="0.017" />
+
+    <Button
+        android:id="@+id/goButton"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/offset"
+        android:text="Go"
+        app:layout_constraintBottom_toBottomOf="@+id/autoComplete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="287dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="52dp"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/offset"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autoComplete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
