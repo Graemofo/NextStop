@@ -1,32 +1,35 @@
 package com.example.nextstop;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.MediaPlayer;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -38,10 +41,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback {
 
     /*
-
+API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
     To Do list
     1. Create a list of Station Objects from JSON
     2. Get current location (lat - lon)
@@ -52,16 +55,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
      */
 
     LocationManager locationManager;
+    Location location;
     TextView distanceView;
+    GoogleMap map;
 
     double dest_lat;
     double dest_long;
     double current_lat;
     double current_long;
     double distanceInKm;
+    double full_distance;
     String stationsJSON = "";
     String value = "";
-    private final static String default_notification_channel_id = "default";
+
 
     public ArrayList<String> destinations = new ArrayList<>();
     public List<Station> stations_list;
@@ -101,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }, 100);
         }
 
-        getLocation();
+        // getLocation();
+        //onMapReady(map);
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,8 +117,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 textView.setText(value);
 
                 getDestinationLatLong(value);
+                onMapReady(map);
+
             }
         });
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
     }
 
@@ -120,9 +133,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         try {
             locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, MainActivity.this);
+            Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            current_lat = locationGPS.getLatitude();
+            current_long = locationGPS.getLongitude();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
     public List<Station> createStationList(String json) {
@@ -158,18 +177,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         }
 
-        double full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
+        full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
         Log.d("Distance", "getDestinationLatLong: " + full_distance + " " + dest_lat + dest_long + " " + current_lat + current_long);
-        Toast.makeText(this, "Distance " + full_distance + "km \n", Toast.LENGTH_LONG).show();
+        // Toast.makeText(this, "Distance " + full_distance + "km \n", Toast.LENGTH_LONG).show();
         distanceView.setText((double) full_distance + " km to destination");
     }
 
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+
         current_lat = location.getLatitude();
         current_long = location.getLongitude();
-        Toast.makeText(this, "Distance Changed \n" + location.getLatitude() + " : " + location.getLongitude() + " " + current_lat + " " + current_long, Toast.LENGTH_LONG).show();
+        //   Toast.makeText(this, "Distance Changed \n" + location.getLatitude() + " : " + location.getLongitude() + " " + current_lat + " " + current_long, Toast.LENGTH_LONG).show();
         double newDistance = distance(current_lat, current_long, dest_lat, dest_long, 'K');
         if (!value.equals("")) {
             distanceView.setText((double) newDistance + " km to destination");
@@ -179,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        Toast.makeText(this, "Changed Status ", Toast.LENGTH_LONG).show();
+        //   Toast.makeText(this, "Changed Status ", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -216,5 +236,34 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         return (rad * 180.0 / Math.PI);
     }
 
+// 53.4478761,-6.1468557
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        getLocation();
+        map = googleMap;
+        MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style);
+        map.setMapStyle(mapStyleOptions);
+
+        Log.d("TAG", "onMapReady: " + current_lat + " " + current_long);
+
+        LatLng destination = new LatLng(dest_lat, dest_long);
+        LatLng current_location = new LatLng(current_lat, current_long);
+        map.addMarker(new MarkerOptions().position(destination).title("Destination").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+        map.addMarker(new MarkerOptions().position(current_location).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+        map.moveCamera(CameraUpdateFactory.newLatLng(destination));
+        map.animateCamera(CameraUpdateFactory.zoomTo(11.0f));
+        map.addCircle(new CircleOptions()
+                .center(new LatLng(current_lat, current_long))
+                .radius(getRadius())
+                .strokeColor(Color.CYAN));
+
+
+    }
+
+    public int getRadius() {
+        return (int) (full_distance * 1000);
+    }
 
 } //end of class
