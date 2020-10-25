@@ -10,10 +10,13 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -25,7 +28,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -41,7 +43,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback {
+import static android.R.layout.simple_spinner_dropdown_item;
+
+public class MainActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
     /*
 API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
@@ -55,22 +59,29 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
      */
 
     LocationManager locationManager;
-    Location location;
     TextView distanceView;
     GoogleMap map;
+    AutoCompleteTextView editText;
+    Button goButton;
+    TextView textView;
+    Spinner spinner;
 
     double dest_lat;
     double dest_long;
     double current_lat;
     double current_long;
-    double distanceInKm;
+
     double full_distance;
     String stationsJSON = "";
+    String luasJSON = "";
     String value = "";
-
+    String spinner_text = "Train";
 
     public ArrayList<String> destinations = new ArrayList<>();
     public List<Station> stations_list;
+
+    public ArrayList<String> luas_stops = new ArrayList<>();
+    public List<Luas> luas_list;
 
 
     @Override
@@ -78,10 +89,50 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button goButton = findViewById(R.id.goButton);
+        goButton = findViewById(R.id.goButton);
         distanceView = findViewById(R.id.distanceView);
-        final TextView textView = findViewById(R.id.textView2);
+        textView = findViewById(R.id.textView2);
+        spinner = findViewById(R.id.spinner);
+        editText = findViewById(R.id.autoComplete);
 
+        //Spinner
+        ArrayAdapter<CharSequence> spin_adapter = ArrayAdapter.createFromResource(this, R.array.mode, android.R.layout.simple_spinner_item);
+        spin_adapter.setDropDownViewResource(simple_spinner_dropdown_item);
+        spinner.setAdapter(spin_adapter);
+        spinner.setOnItemSelectedListener(this);
+
+        setupStations();
+
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            }, 100);
+        }
+
+        goButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                value = editText.getText().toString();
+                textView.setText(value);
+                if (spinner_text.equals("Train")) {
+                    getDestinationLatLong(value);
+                } else {
+                    getLuasDestinationLatLong(value);
+                }
+
+                onMapReady(map);
+            }
+        });
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+    }//end of onCreate
+
+    public void setupStations() {
         try {
             InputStream inputStream = getAssets().open("stations.json");
             int size = inputStream.available();
@@ -91,40 +142,17 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
             stations_list = createStationList(stationsJSON);  // List of Station objects
             destinations = createDestinations(stations_list); // List of Station names
 
+            InputStream luasInputStream = getAssets().open("luas.json");
+            int inputSize = luasInputStream.available();
+            byte[] luasBuffer = new byte[inputSize];
+            luasInputStream.read(luasBuffer);
+            luasJSON = new String(luasBuffer);
+            luas_list = createLuasList(luasJSON);           // List of Luas objects
+            luas_stops = createLuasDestinations(luas_list); // List of luas Station names
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        final AutoCompleteTextView editText = findViewById(R.id.autoComplete);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, destinations);
-        editText.setAdapter(adapter);
-
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            }, 100);
-        }
-
-        // getLocation();
-        //onMapReady(map);
-
-        goButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                value = editText.getText().toString();
-                textView.setText(value);
-
-                getDestinationLatLong(value);
-                onMapReady(map);
-
-            }
-        });
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
     }
 
@@ -154,6 +182,15 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
         return stations;
     }
 
+    public List<Luas> createLuasList(String json) {
+        Type luasType = new TypeToken<ArrayList<Luas>>() {
+        }.getType();
+        List<Luas> luasStations = new Gson().fromJson(json, luasType);
+        luas_list = luasStations;
+
+        return luasStations;
+    }
+
     public void printStations(List<Station> stations) {
         Collections.sort(stations);
         for (Station station : stations) {
@@ -169,6 +206,13 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
         return destinations;
     }
 
+    public ArrayList<String> createLuasDestinations(List<Luas> stations) {
+        for (Luas station : stations) {
+            luas_stops.add(station.get__text());
+        }
+        return luas_stops;
+    }
+
     public void getDestinationLatLong(String dest) {
         for (Station station : stations_list) {
             if (station.getStationDesc().equals(dest)) {
@@ -177,6 +221,19 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
             }
         }
 
+        full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
+        Log.d("Distance", "getDestinationLatLong: " + full_distance + " " + dest_lat + dest_long + " " + current_lat + current_long);
+        // Toast.makeText(this, "Distance " + full_distance + "km \n", Toast.LENGTH_LONG).show();
+        distanceView.setText((double) full_distance + " km to destination");
+    }
+
+    public void getLuasDestinationLatLong(String dest) {
+        for (Luas station : luas_list) {
+            if (station.get__text().equals(dest)) {
+                dest_lat = station.get_lat();
+                dest_long = station.get_long();
+            }
+        }
         full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
         Log.d("Distance", "getDestinationLatLong: " + full_distance + " " + dest_lat + dest_long + " " + current_lat + current_long);
         // Toast.makeText(this, "Distance " + full_distance + "km \n", Toast.LENGTH_LONG).show();
@@ -259,11 +316,29 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
                 .radius(getRadius())
                 .strokeColor(Color.CYAN));
 
-
     }
 
     public int getRadius() {
         return (int) (full_distance * 1000);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        spinner_text = adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(this, "Mode: " + spinner_text, Toast.LENGTH_LONG).show();
+        if (spinner_text.equals("Train")) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1, destinations);
+            editText.setAdapter(adapter);
+        } else {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1, luas_stops);
+            editText.setAdapter(adapter);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 } //end of class

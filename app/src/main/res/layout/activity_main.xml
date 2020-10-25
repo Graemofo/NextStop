@@ -10,8 +10,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="306dp"
-        android:layout_height="40dp"
+        android:layout_width="246dp"
+        android:layout_height="33dp"
         android:gravity="center"
         android:text="Please enter your destination "
         android:textAlignment="center"
@@ -19,20 +19,31 @@
         android:textColorHint="@color/text"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Spinner
+
+        android:id="@+id/spinner"
+        android:layout_width="142dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
-        android:padding="10dp"
-        android:background="@drawable/rounded"
         android:id="@+id/autoComplete"
         android:layout_width="257dp"
         android:layout_height="40dp"
+        android:background="@drawable/rounded"
         android:completionHint="Select a train station"
-        android:hint="Enter Destination"
+        android:hint="Destination"
+        android:padding="10dp"
         android:textColor="@color/offset"
         android:textColorHint="@color/offset"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,15 +54,15 @@
         app:layout_constraintVertical_bias="0.017" />
 
     <Button
-        android:padding="10dp"
-        android:textColor="@color/text"
         android:id="@+id/goButton"
         android:layout_width="95dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/rounded_button"
+        android:padding="10dp"
         android:text="Set"
+        android:textColor="@color/text"
         app:layout_constraintBottom_toBottomOf="@+id/autoComplete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -95,16 +106,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/distanceView"
         app:layout_constraintVertical_bias="1.0" />
-
-    <!--    <com.google.android.gms.maps.MapView-->
-<!--        android:id="@+id/mapView"-->
-<!--        android:layout_width="284dp"-->
-<!--        android:layout_height="346dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/distanceView" />-->
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

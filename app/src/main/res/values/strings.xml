@@ -1,3 +1,10 @@
 <resources>
+
     <string name="app_name">NextStop</string>
+
+    <string-array name="mode">
+        <item>Train</item>
+        <item>Luas</item>
+    </string-array>
+
 </resources>
