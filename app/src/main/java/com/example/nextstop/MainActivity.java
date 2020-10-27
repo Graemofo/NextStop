@@ -2,14 +2,17 @@ package com.example.nextstop;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Ringtone;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -65,6 +68,7 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
     Button goButton;
     TextView textView;
     Spinner spinner;
+    Ringtone ringtone;
 
     double dest_lat;
     double dest_long;
@@ -114,7 +118,10 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                closeKeyboard();
+                map.clear();
                 value = editText.getText().toString();
+                editText.setText("");
                 textView.setText(value);
                 if (spinner_text.equals("Train")) {
                     getDestinationLatLong(value);
@@ -309,8 +316,8 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
         LatLng current_location = new LatLng(current_lat, current_long);
         map.addMarker(new MarkerOptions().position(destination).title("Destination").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
         map.addMarker(new MarkerOptions().position(current_location).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
-        map.moveCamera(CameraUpdateFactory.newLatLng(destination));
-        map.animateCamera(CameraUpdateFactory.zoomTo(11.0f));
+        map.moveCamera(CameraUpdateFactory.newLatLng(current_location));
+        map.animateCamera(CameraUpdateFactory.zoomTo(12.0f));
         map.addCircle(new CircleOptions()
                 .center(new LatLng(current_lat, current_long))
                 .radius(getRadius())
@@ -324,8 +331,9 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
         spinner_text = adapterView.getItemAtPosition(i).toString();
-        Toast.makeText(this, "Mode: " + spinner_text, Toast.LENGTH_LONG).show();
+       // Toast.makeText(this, "Mode: " + spinner_text, Toast.LENGTH_LONG).show();
         if (spinner_text.equals("Train")) {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1, destinations);
@@ -340,5 +348,13 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 } //end of class
