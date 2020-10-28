@@ -2,16 +2,6 @@ package com.example.nextstop;
 
 public class Luas {
 
-    /* {
-    "_abrev": "TPT",
-    "_isParkRide": "0",
-    "_isCycleRide": "0",
-    "_lat": "53.34835",
-    "_long": "-6.22925833333333",
-    "_pronunciation": "The Point",
-    "__text": "The Point" }
-    * */
-
     private String _abrev;
     private String _isParkRide;
     private String _isCycleRide;

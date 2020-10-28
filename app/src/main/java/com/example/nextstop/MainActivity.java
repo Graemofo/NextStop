@@ -2,14 +2,23 @@ package com.example.nextstop;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -22,7 +31,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -45,30 +57,31 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
 
 import static android.R.layout.simple_spinner_dropdown_item;
 
 public class MainActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
-    /*
-API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
-    To Do list
-    1. Create a list of Station Objects from JSON
-    2. Get current location (lat - lon)
-    3. Create UI to accept destination (fetch possible destinations) Auto Complete
-    4. Get destination location (lat - lon)
-    5. Send alert when within 500m
-
-     */
+    /*  TO DO
+    * 1. Check input isn't null
+    * 2. Hide Stop Button / Show Stop Button
+    * 3. Link onLocationChanged to Alarm
+    * */
 
     LocationManager locationManager;
     TextView distanceView;
     GoogleMap map;
     AutoCompleteTextView editText;
     Button goButton;
+    Button stopButton;
     TextView textView;
     Spinner spinner;
     Ringtone ringtone;
+    Notifications notifications;
+    CheckDistance checkDistance;
+    Vibrator vibrator;
+    NotificationManagerCompat notificationManagerCompat;
 
     double dest_lat;
     double dest_long;
@@ -88,22 +101,32 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
     public List<Luas> luas_list;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        createNotificationChannel();
+
+        notifications = new Notifications();
+        checkDistance = new CheckDistance();
 
         goButton = findViewById(R.id.goButton);
+        stopButton = findViewById(R.id.stopAlarm);
         distanceView = findViewById(R.id.distanceView);
         textView = findViewById(R.id.textView2);
         spinner = findViewById(R.id.spinner);
         editText = findViewById(R.id.autoComplete);
+
+        //Hide Stop Button on set up
+        stopButton.setVisibility(View.INVISIBLE);
 
         //Spinner
         ArrayAdapter<CharSequence> spin_adapter = ArrayAdapter.createFromResource(this, R.array.mode, android.R.layout.simple_spinner_item);
         spin_adapter.setDropDownViewResource(simple_spinner_dropdown_item);
         spinner.setAdapter(spin_adapter);
         spinner.setOnItemSelectedListener(this);
+
 
         setupStations();
 
@@ -119,6 +142,7 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
             @Override
             public void onClick(View view) {
                 closeKeyboard();
+                stopButton.setVisibility(View.VISIBLE);
                 map.clear();
                 value = editText.getText().toString();
                 editText.setText("");
@@ -128,8 +152,15 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
                 } else {
                     getLuasDestinationLatLong(value);
                 }
-
+                ringAlarm();
                 onMapReady(map);
+            }
+        });
+
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ringtone.stop();
             }
         });
 
@@ -227,8 +258,8 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
                 dest_long = station.getStationLongitude();
             }
         }
-
-        full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
+        full_distance = checkDistance.distance(dest_lat, dest_long, current_lat, current_long, 'K');
+        // full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
         Log.d("Distance", "getDestinationLatLong: " + full_distance + " " + dest_lat + dest_long + " " + current_lat + current_long);
         // Toast.makeText(this, "Distance " + full_distance + "km \n", Toast.LENGTH_LONG).show();
         distanceView.setText((double) full_distance + " km to destination");
@@ -241,7 +272,8 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
                 dest_long = station.get_long();
             }
         }
-        full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
+        full_distance = checkDistance.distance(dest_lat, dest_long, current_lat, current_long, 'K');
+        //  full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
         Log.d("Distance", "getDestinationLatLong: " + full_distance + " " + dest_lat + dest_long + " " + current_lat + current_long);
         // Toast.makeText(this, "Distance " + full_distance + "km \n", Toast.LENGTH_LONG).show();
         distanceView.setText((double) full_distance + " km to destination");
@@ -253,8 +285,10 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
 
         current_lat = location.getLatitude();
         current_long = location.getLongitude();
-        //   Toast.makeText(this, "Distance Changed \n" + location.getLatitude() + " : " + location.getLongitude() + " " + current_lat + " " + current_long, Toast.LENGTH_LONG).show();
-        double newDistance = distance(current_lat, current_long, dest_lat, dest_long, 'K');
+      //  Toast.makeText(this, "Distance Changed \n" + location.getLatitude() + " : " + location.getLongitude() + " " + current_lat + " " + current_long, Toast.LENGTH_LONG).show();
+        double newDistance = checkDistance.distance(dest_lat, dest_long, current_lat, current_long, 'K');
+        Toast.makeText(this, "Distance Changed \n" +newDistance, Toast.LENGTH_LONG).show();
+
         if (!value.equals("")) {
             distanceView.setText((double) newDistance + " km to destination");
         }
@@ -263,7 +297,7 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        //   Toast.makeText(this, "Changed Status ", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -274,30 +308,6 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
     @Override
     public void onProviderDisabled(@NonNull String provider) {
 
-    }
-
-    public double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
-        double theta = lon1 - lon2;
-        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
-        dist = Math.acos(dist);
-        dist = rad2deg(dist);
-        dist = dist * 60 * 1.1515;
-        if (unit == 'K') {
-            dist = dist * 1.609344;
-        } else if (unit == 'N') {
-            dist = dist * 0.8684;
-        }
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.format(dist);
-        return Double.parseDouble((df.format(dist)));
-    }
-
-    private double deg2rad(double deg) {
-        return (deg * Math.PI / 180.0);
-    }
-
-    private double rad2deg(double rad) {
-        return (rad * 180.0 / Math.PI);
     }
 
 // 53.4478761,-6.1468557
@@ -333,7 +343,7 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
         spinner_text = adapterView.getItemAtPosition(i).toString();
-       // Toast.makeText(this, "Mode: " + spinner_text, Toast.LENGTH_LONG).show();
+        // Toast.makeText(this, "Mode: " + spinner_text, Toast.LENGTH_LONG).show();
         if (spinner_text.equals("Train")) {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1, destinations);
@@ -357,4 +367,70 @@ API KEY AIzaSyDQZV9qz4b5pj6PeD361ntTnxx6zZQbSlc
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void ringAlarm() {
+        Intent activityIntent = this.getPackageManager()
+                .getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
+        PendingIntent pending = PendingIntent.getActivity(this, 0, activityIntent, 0);
+
+        Intent broadcastIntent = new Intent(this, NotificationReceiver.class);
+        broadcastIntent.putExtra("cancel", "Alarm Stopped");
+        PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "nextStop")
+                .setSmallIcon(R.drawable.train_foreground)
+                .setContentTitle("Next Stop")
+                .setContentText("You are pulling in to " + value)
+                .addAction(R.drawable.train_foreground, "Stop Alarm", actionIntent)
+                .setAutoCancel(true)
+                .setColor(Color.WHITE)
+                .setOnlyAlertOnce(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pending);
+        notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(6, builder.build());
+
+
+        vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(10000);
+
+
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+        ringtone.play();
+
+
+
+    }
+
+    public void stopAlerts() {
+
+        if (ringtone != null) {
+            ringtone.stop();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void createNotificationChannel() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            CharSequence name = "NextStopChannel";
+            String desrcription = "Channel for all modes of transport ";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("nextStop", name, importance);
+            channel.setDescription(desrcription);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+
 } //end of class

@@ -2,6 +2,10 @@ package com.example.nextstop;
 
 import java.text.DecimalFormat;
 
+/*
+*   Class to calculate the distance between 2 locations based on their longitude and latitude
+* */
+
 public class CheckDistance {
 
     public CheckDistance() {

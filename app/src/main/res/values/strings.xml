@@ -1,6 +1,9 @@
 <resources>
 
     <string name="app_name">NextStop</string>
+    <string name="please_enter_your_destination">Please enter your destination</string>
+    <string name="set">Set</string>
+    <string name="destination">Destination</string>
 
     <string-array name="mode">
         <item>Train</item>
