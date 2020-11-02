@@ -6,8 +6,10 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -18,6 +20,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
@@ -63,18 +67,17 @@ import static android.R.layout.simple_spinner_dropdown_item;
 
 public class MainActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
-    /*  TO DO
-    * 1. Check input isn't null
-    * 2. Hide Stop Button / Show Stop Button
-    * 3. Link onLocationChanged to Alarm
-    * */
+    /*
+    *
+    * 1. Stop Alarm: Action Button
+    * 2. Cancel Alarm: Action Button
+    * 3. Move Notification Channel to App class */
 
     LocationManager locationManager;
     TextView distanceView;
     GoogleMap map;
     AutoCompleteTextView editText;
-    Button goButton;
-    Button stopButton;
+    Button goButton, stopButton;
     TextView textView;
     Spinner spinner;
     Ringtone ringtone;
@@ -82,17 +85,25 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     CheckDistance checkDistance;
     Vibrator vibrator;
     NotificationManagerCompat notificationManagerCompat;
+    BroadcastReceiver broadcastReceiver;
+    SupportMapFragment mapFragment;
 
-    double dest_lat;
-    double dest_long;
-    double current_lat;
-    double current_long;
+    static double dest_lat;
+    static double dest_long;
+    static double current_lat;
+    static double current_long;
 
     double full_distance;
+    double newDistance;
+    boolean oneTime = true;
+    boolean atDestination = false;
+
     String stationsJSON = "";
     String luasJSON = "";
     String value = "";
     String spinner_text = "Train";
+
+    Intent intent;
 
     public ArrayList<String> destinations = new ArrayList<>();
     public List<Station> stations_list;
@@ -100,13 +111,17 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     public ArrayList<String> luas_stops = new ArrayList<>();
     public List<Luas> luas_list;
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setupStations();
         createNotificationChannel();
+
+        final Button stopService = findViewById(R.id.stop_service_button);
+        intent = new Intent(getApplicationContext(), GPS_Service.class);
 
         notifications = new Notifications();
         checkDistance = new CheckDistance();
@@ -118,8 +133,8 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         spinner = findViewById(R.id.spinner);
         editText = findViewById(R.id.autoComplete);
 
-        //Hide Stop Button on set up
         stopButton.setVisibility(View.INVISIBLE);
+
 
         //Spinner
         ArrayAdapter<CharSequence> spin_adapter = ArrayAdapter.createFromResource(this, R.array.mode, android.R.layout.simple_spinner_item);
@@ -127,22 +142,10 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         spinner.setAdapter(spin_adapter);
         spinner.setOnItemSelectedListener(this);
 
-
-        setupStations();
-
-
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            }, 100);
-        }
-
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 closeKeyboard();
-                stopButton.setVisibility(View.VISIBLE);
                 map.clear();
                 value = editText.getText().toString();
                 editText.setText("");
@@ -152,7 +155,9 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                 } else {
                     getLuasDestinationLatLong(value);
                 }
-                ringAlarm();
+                intent.putExtra("input", value+ ":  "+full_distance+"km to destination");
+                startService(intent);
+                // ringAlarm();
                 onMapReady(map);
             }
         });
@@ -161,14 +166,33 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
             @Override
             public void onClick(View view) {
                 ringtone.stop();
+                stopButton.setVisibility(View.INVISIBLE);
+                stopAlerts();
             }
         });
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        stopService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             //   stopService(intent);
+                getApplicationContext().stopService(new Intent(MainActivity.this, GPS_Service.class));
+            }
+        });
+
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
     }//end of onCreate
+
+    public static double getDest_lat() {
+        return dest_lat;
+    }
+
+    public static double getDest_long() {
+        return dest_long;
+    }
 
     public void setupStations() {
         try {
@@ -206,15 +230,12 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     public List<Station> createStationList(String json) {
         Type stationType = new TypeToken<ArrayList<Station>>() {
         }.getType();
         List<Station> stations = new Gson().fromJson(json, stationType);
-        printStations(stations);
         stations_list = stations;
 
         return stations;
@@ -259,10 +280,8 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
             }
         }
         full_distance = checkDistance.distance(dest_lat, dest_long, current_lat, current_long, 'K');
-        // full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
         Log.d("Distance", "getDestinationLatLong: " + full_distance + " " + dest_lat + dest_long + " " + current_lat + current_long);
-        // Toast.makeText(this, "Distance " + full_distance + "km \n", Toast.LENGTH_LONG).show();
-        distanceView.setText((double) full_distance + " km to destination");
+        distanceView.setText(full_distance + " km to destination");
     }
 
     public void getLuasDestinationLatLong(String dest) {
@@ -273,26 +292,28 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
             }
         }
         full_distance = checkDistance.distance(dest_lat, dest_long, current_lat, current_long, 'K');
-        //  full_distance = distance(dest_lat, dest_long, current_lat, current_long, 'K');
         Log.d("Distance", "getDestinationLatLong: " + full_distance + " " + dest_lat + dest_long + " " + current_lat + current_long);
-        // Toast.makeText(this, "Distance " + full_distance + "km \n", Toast.LENGTH_LONG).show();
-        distanceView.setText((double) full_distance + " km to destination");
+        distanceView.setText(full_distance + " km to destination");
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onLocationChanged(@NonNull Location location) {
 
+        double threshold = 0.50;
         current_lat = location.getLatitude();
         current_long = location.getLongitude();
-      //  Toast.makeText(this, "Distance Changed \n" + location.getLatitude() + " : " + location.getLongitude() + " " + current_lat + " " + current_long, Toast.LENGTH_LONG).show();
-        double newDistance = checkDistance.distance(dest_lat, dest_long, current_lat, current_long, 'K');
-        Toast.makeText(this, "Distance Changed \n" +newDistance, Toast.LENGTH_LONG).show();
-
+        newDistance = checkDistance.distance(dest_lat, dest_long, current_lat, current_long, 'K');
         if (!value.equals("")) {
-            distanceView.setText((double) newDistance + " km to destination");
+            distanceView.setText(newDistance + " km to destination");
         }
-
+        if (newDistance <= threshold && oneTime) {
+            oneTime = false;
+            stopButton.setVisibility(View.VISIBLE);
+            stopService(intent);
+            ringAlarm();
+        }
     }
 
     @Override
@@ -309,8 +330,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     public void onProviderDisabled(@NonNull String provider) {
 
     }
-
-// 53.4478761,-6.1468557
 
     @SuppressLint("MissingPermission")
     @Override
@@ -332,7 +351,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                 .center(new LatLng(current_lat, current_long))
                 .radius(getRadius())
                 .strokeColor(Color.CYAN));
-
     }
 
     public int getRadius() {
@@ -343,7 +361,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
         spinner_text = adapterView.getItemAtPosition(i).toString();
-        // Toast.makeText(this, "Mode: " + spinner_text, Toast.LENGTH_LONG).show();
         if (spinner_text.equals("Train")) {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1, destinations);
@@ -371,6 +388,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void ringAlarm() {
+        stopButton.setVisibility(View.VISIBLE);
         Intent activityIntent = this.getPackageManager()
                 .getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
         PendingIntent pending = PendingIntent.getActivity(this, 0, activityIntent, 0);
@@ -387,28 +405,26 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                 .setAutoCancel(true)
                 .setColor(Color.WHITE)
                 .setOnlyAlertOnce(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pending);
         notificationManagerCompat = NotificationManagerCompat.from(this);
         notificationManagerCompat.notify(6, builder.build());
 
 
         vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(10000);
+        vibrator.vibrate(5000);
 
 
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
         ringtone.play();
 
-
-
     }
 
     public void stopAlerts() {
-
         if (ringtone != null) {
             ringtone.stop();
+            notificationManagerCompat.cancelAll();
         }
     }
 
@@ -427,10 +443,25 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-
+    protected void onResume() {
+        super.onResume();
+        Log.d("MAP", "onResume: MainActivity"+value);
+        if (map != null) {
+            map.clear();
+            textView.setText(value);
+            if (spinner_text.equals("Train")) {
+                getDestinationLatLong(value);
+            } else {
+                getLuasDestinationLatLong(value);
+            }
+            onMapReady(map);
+        }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("MainActivity", "onDestroy: ");
+        getApplicationContext().stopService(new Intent(this, GPS_Service.class));
+    }
 } //end of class

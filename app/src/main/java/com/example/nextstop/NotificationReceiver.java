@@ -17,7 +17,8 @@ public class NotificationReceiver extends BroadcastReceiver {
         String message = intent.getStringExtra("cancel");
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         MainActivity main = new MainActivity();
-      //  main.stopAlerts();
+        main.stopAlerts();
 
     }
+
 }

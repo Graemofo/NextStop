@@ -98,6 +98,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+    <Button
+        android:textStyle="bold|italic"
+        android:id="@+id/stopAlarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop Alarm"
+        android:textColor="@color/offset"
+        app:layout_constraintBottom_toTopOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/distanceView"
+        app:layout_constraintVertical_bias="1.0" />
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -111,17 +125,14 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/stopAlarm"
-        android:layout_width="match_parent"
+        android:id="@+id/stop_service_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop Alarm"
-        android:textColor="@color/offset"
-        app:layout_constraintBottom_toTopOf="@+id/map"
+        android:text="Stop Service"
+        app:layout_constraintBottom_toTopOf="@+id/stopAlarm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/distanceView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/distanceView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
