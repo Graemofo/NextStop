@@ -2,30 +2,38 @@ package com.example.nextstop;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.LocationListener;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import static com.example.nextstop.MainActivity.locationManager;
 
 public class App extends Application {
 
     public static final String CHANNEL_ID = "gps_channel";
     public static final String ALARM_ID = "alarm_id";
+    public static final String CANCEL_ALARM = "CANCEL_ALARM";
+    public static final String STOP_ALARM = "STOP_ALARM";
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         createChannel();
+
     }
 
     private void createChannel() {
 
-        runtime_permissions();
+       // runtime_permissions();
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             CharSequence name = "Service_Channel";
@@ -47,14 +55,20 @@ public class App extends Application {
             notificationManager.createNotificationChannel(channel);
             notificationManager.createNotificationChannel(alarmChannel);
         }
+
     }// end of onCreate
 
     private void runtime_permissions() {
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
             ActivityCompat.requestPermissions((Activity) getApplicationContext(), new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION
             }, 100);
         }
     }
+
+
+
+
+
 }

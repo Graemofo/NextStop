@@ -68,8 +68,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="ffffff" />
-                                                <entry key="imagePath" value="/private/var/folders/qp/8cvdjnhn7f77_svdxwqqrbm00000gn/T/sharp_train_24.xml" />
-                                                <entry key="scalingPercent" value="95" />
+                                                <entry key="imagePath" value="/private/var/folders/qp/8cvdjnhn7f77_svdxwqqrbm00000gn/T/baseline_location_on_24.xml" />
+                                                <entry key="scalingPercent" value="133" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -80,7 +80,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material/icons/materialiconssharp/train/sharp_train_24.xml" />
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material/icons/materialicons/location_on/baseline_location_on_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -124,6 +124,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
+                                      <entry key="foregroundLayerName" value="location_foreground" />
                                       <entry key="outputName" value="train" />
                                     </map>
                                   </option>

@@ -8,40 +8,156 @@
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="246dp"
-        android:layout_height="33dp"
-        android:gravity="center"
-        android:text="@string/please_enter_your_destination"
-        android:textAlignment="center"
-        android:textColor="@color/text"
-        android:textColorHint="@color/text"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <Spinner
-        android:textAlignment="center"
-        app:backgroundTint="@color/text"
-        android:id="@+id/spinner"
-        android:layout_width="142dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="16dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.347"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:gravity="end"
+            android:typeface="monospace"
+            app:backgroundTint="@color/text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.771"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <Button
+        android:id="@+id/goButton"
+        android:layout_width="73dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/rounded_button"
+        android:padding="10dp"
+        android:text="@string/set"
+        android:textColor="@color/text"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="@+id/autoComplete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/autoComplete"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/stop_service_button"
+        android:layout_width="148dp"
+        android:layout_height="34dp"
+        android:background="@drawable/rounded_button"
+        android:shadowColor="@color/cardview_dark_background"
+        android:text="Cancel Alarm"
+        android:textColor="@color/text"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autoComplete"
+        app:layout_constraintVertical_bias="0.208" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="393dp"
+        android:layout_height="487dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="10sp"
+        android:paddingBottom="5sp"
+        android:typeface="monospace"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/distanceView"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="393dp"
+            android:layout_height="493dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:padding="10sp"
+                android:text=""
+                android:textColor="@color/text"
+                android:textSize="30sp"
+                android:tooltipText="Malahide"
+                android:typeface="monospace"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.009" />
+
+            <TextView
+                android:id="@+id/distanceView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="10sp"
+                android:textColor="@color/text"
+                android:textSize="20sp"
+                android:typeface="monospace"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/stopAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/rounded_button"
+                android:text="Stop Alarm"
+                android:textColor="@color/offset"
+                android:textStyle="bold|italic"
+                android:typeface="monospace"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/distanceView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
     <AutoCompleteTextView
         android:id="@+id/autoComplete"
         android:layout_width="257dp"
         android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rounded"
         android:completionHint="Select a station"
         android:hint="@string/destination"
@@ -49,90 +165,11 @@
         android:paddingRight="15sp"
         android:textColor="@color/offset"
         android:textColorHint="@color/offset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.146"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.017" />
-
-    <Button
-        android:id="@+id/goButton"
-        android:layout_width="95dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/rounded_button"
-        android:padding="10dp"
-        android:text="@string/set"
-        android:textColor="@color/text"
-        app:layout_constraintBottom_toBottomOf="@+id/autoComplete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="287dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="52dp"
-        android:gravity="center_horizontal"
-        android:text=""
-        android:textAlignment="center"
-        android:textColor="@color/text"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autoComplete" />
-
-    <TextView
-        android:id="@+id/distanceView"
-        android:layout_width="289dp"
-        android:layout_height="74dp"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textColor="@color/text"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <Button
-        android:textStyle="bold|italic"
-        android:id="@+id/stopAlarm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stop Alarm"
-        android:textColor="@color/offset"
-        app:layout_constraintBottom_toTopOf="@+id/map"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/distanceView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="313dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/distanceView"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/stop_service_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop Service"
-        app:layout_constraintBottom_toTopOf="@+id/stopAlarm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/distanceView" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
